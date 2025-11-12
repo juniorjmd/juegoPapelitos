@@ -1,7 +1,0 @@
- 
-URL_FRONT=juegopapelitos.com/login
-MAIL_HOST=smtp-relay.brevo.com
-MAIL_PORT=587
-MAIL_USER=98f0ae001@smtp-brevo.com
-MAIL_PASS=bsk8D0aLs3hwMu2
-BREVO_SENDER_EMAIL=juniorjmd@gmail.com
