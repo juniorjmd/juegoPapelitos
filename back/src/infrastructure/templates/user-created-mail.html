@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bienvenido a Juego Papelitos 🎉</title>
+  </head>
+  <body
+    style="
+      font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+      background-color: #f5f5f5;
+      margin: 0;
+      padding: 20px;
+    "
+  >
+    <table
+      align="center"
+      width="100%"
+      cellpadding="0"
+      cellspacing="0"
+      style="max-width: 600px; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);"
+    >
+      <tr>
+        <td
+          align="center"
+          style="background-color: #6a1b9a; color: #ffffff; padding: 20px;"
+        >
+          <h1 style="margin: 0; font-size: 22px;">Bienvenido a Juego Papelitos 🎮</h1>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="padding: 30px; color: #333333;">
+          <p style="font-size: 16px;">Hola <strong>{{name}}</strong>,</p>
+
+          <p style="font-size: 15px; line-height: 1.5;">
+            ¡Tu cuenta ha sido creada exitosamente en <strong>Juego Papelitos</strong>! 🎉
+          </p>
+
+          <p style="font-size: 15px; margin-top: 15px;">
+            Estos son tus datos de acceso:
+          </p>
+
+          <table
+            width="100%"
+            cellpadding="8"
+            cellspacing="0"
+            style="background: #fafafa; border-radius: 5px; margin-top: 10px;"
+          >
+            <tr>
+              <td><strong>Correo:</strong></td>
+              <td>{{email}}</td>
+            </tr>
+            <tr>
+              <td><strong>Contraseña temporal:</strong></td>
+              <td>{{password}}</td>
+            </tr>
+          </table>
+
+          <p style="margin-top: 25px; text-align: center;">
+            <a
+              href="{{loginUrl}}"
+              target="_blank"
+              style="
+                background-color: #7b1fa2;
+                color: white;
+                padding: 12px 20px;
+                text-decoration: none;
+                border-radius: 6px;
+                font-weight: bold;
+                display: inline-block;
+              "
+              >Ingresar al juego</a
+            >
+          </p>
+
+          <p style="font-size: 14px; color: #666; margin-top: 25px;">
+            Por seguridad, cambia tu contraseña al ingresar por primera vez.
+          </p>
+
+          <p style="font-size: 14px; color: #666;">
+            ¡Diviértete y disfruta la experiencia con tus amigos y familia! 😄
+          </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td align="center"     style="
+            background-color: #f1f1f1;
+            color: #777777;
+            font-size: 12px;
+            padding: 15px;
+          "
+        >
+          © {{year}} Juego Papelitos. Todos los derechos reservados.
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
