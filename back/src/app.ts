@@ -1,4 +1,4 @@
-import { Server } from "../src/presentation/server.js";
+import { Server } from "./presentation/server.js"; 
 
 await main();
 
