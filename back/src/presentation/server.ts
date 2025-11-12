@@ -9,8 +9,7 @@ export class Server {
     private readonly port: number; 
 
     constructor() {
-        this.port = Number(process.env.PORT) || 3000; 
-        
+        this.port = Number(process.env.PORT) || 3000;  
         this.app.use(cors());
         this.app.use(express.json());
         this.app.use(Routes.routes);
