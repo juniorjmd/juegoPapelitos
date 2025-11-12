@@ -1,0 +1,35 @@
+<form id="userForm" class="needs-validation" novalidate>
+  <input type="hidden" name="id" value="{{id}}">
+
+  <div class="mb-3">
+    <label class="form-label">Nombre</label>
+    <input type="text" class="form-control" name="name" value="{{name}}" required>
+    <div class="invalid-feedback">El nombre es obligatorio.</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input type="email" class="form-control" name="email" value="{{email}}" required>
+    <div class="invalid-feedback">El correo es obligatorio.</div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Contraseña</label>
+    <input type="password" class="form-control" name="password" value="{{password}}" required>
+    <div class="invalid-feedback">La contraseña es obligatoria.</div>
+  </div>
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" name="isAdult" {{checked_adult}}>
+    <label class="form-check-label">Es Adulto</label>
+  </div>
+
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" name="isActive" {{checked_active}}>
+    <label class="form-check-label">Activo</label>
+  </div>
+
+  <div class="text-end">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>

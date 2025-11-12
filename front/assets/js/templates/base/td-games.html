@@ -1,0 +1,17 @@
+ <tr>
+      <td>{{title}}</td>
+      <td>{{genre}}</td>
+      <td>{{isActive}}</td>
+      <td><btn-modal 
+         modal-id="gameModal_{{id}}"
+        modal-template="playersByGamModal"
+        modal-title="Jugadores de {{title}}"
+        btn = "ver jugadores"
+        icon = "bi bi-people"
+        modal-size="modal-lg" 
+        on-open="cargarDatosJugadores('{{id}}')"
+        nombre-data="jugadores"
+        onSubForm  = "formGuardarPlayers",
+        datosExtra = '{"id_juego":"{{id}}" }'
+        ></btn-modal></td>
+    </tr>

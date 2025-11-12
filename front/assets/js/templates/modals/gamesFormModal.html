@@ -1,0 +1,22 @@
+<form id="gameForm" class="needs-validation" novalidate>
+  <input type="hidden" name="id" value="{{id}}">
+  <div class="mb-3">
+    <label class="form-label">Título</label>
+    <input type="text" name="title" class="form-control" value="{{title}}" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Género</label>
+    <select name="genre" class="form-select" required>
+      <option value="adult" {{selected_adult}}>Adulto</option>
+      <option value="kids" {{selected_kids}}>Niños</option>
+      <option value="all" {{selected_all}}>Todos</option>
+    </select>
+  </div>
+  <div class="form-check mb-3">
+    <input type="checkbox" class="form-check-input" name="isActive" {{checked}}>
+    <label class="form-check-label">Activo</label>
+  </div>
+  <div class="text-end">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+  </div>
+</form>
