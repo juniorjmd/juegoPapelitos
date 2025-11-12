@@ -1,9 +1,11 @@
  
 import { UserImplRepository } from '../../infrastructure/repositories/user-impl.repository.js';
 import { MongoUserDatasource } from '../../infrastructure/datasources/mongo-user.datasource.js';
+import { MailerService } from '../services/mailer.services.js';
 
 export class  UsersController {
   readonly UserRepo =  new UserImplRepository(new MongoUserDatasource());
+  private mailerService = new MailerService();
 
     public  getUsers = async (req:any, res:any) => {
        try {
@@ -37,7 +39,9 @@ export class  UsersController {
         return this.UserRepo.getUserByEmail(email);
     }
     public   createUser = async (req:any, res:any)=>  {
+        const pwd = req.body.password
         const user = await  this.UserRepo.createUser(req.body);
+        await this.mailerService.sendUserCreatedMail(user,pwd);
         res.json(user);
 
     }
@@ -48,5 +52,5 @@ export class  UsersController {
         return this.UserRepo.deactivateUser(userId);
     }    
 
-
+  
 }
