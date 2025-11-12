@@ -9,5 +9,9 @@
         btn = "ver jugadores"
         icon = "bi bi-people"
         modal-size="modal-lg" 
+        on-open="cargarDatosJugadores('{{id}}')"
+        nombre-data="jugadores"
+        onSubForm  = "formGuardarPlayers",
+        datosExtra = '{"id_juego":"{{id}}" }'
         ></btn-modal></td>
     </tr>

@@ -10,7 +10,7 @@ export class Modal {
    * @param {object} config.bodyData - Datos para interpolar en el cuerpo
    * @param {string} [config.size=""] - Tamaño opcional (modal-lg, etc.)
    */
-  static async show({ id, title, bodyTemplate, bodyData = {}, size = '' }) {
+  static async show({ id, title, bodyTemplate, bodyData = {}, size = '',onSubForm }) {
     // Renderiza el cuerpo desde el template específico
     const bodyHTML = await renderTemplate(bodyTemplate, bodyData);
 
@@ -29,6 +29,14 @@ export class Modal {
     // Inicializa Bootstrap modal
     const modalEl = document.getElementById(id);
     const modal = new bootstrap.Modal(modalEl);
+     if (onSubForm) {
+          const fn = window[onSubForm];
+          if (typeof fn === 'function') {
+            fn(modal);
+          } else {
+            console.error(`❌ No se encontró la función global "${onSubForm}"`);
+          }
+        }
     modal.show();
 
     return modal;
