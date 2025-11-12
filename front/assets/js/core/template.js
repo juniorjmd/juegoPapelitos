@@ -14,9 +14,24 @@ export async function renderTemplate(path, data = {}) {
 
   let template = content;
   for (const [key, value] of Object.entries(data)) {
+     if (Array.isArray(value)) continue; 
     const regex = new RegExp(`{{\\s*${key}\\s*}}`, 'g');
     template = template.replace(regex, value ?? '');
   }
+
+  const eachRegex = /{{#each (\w+)}}([\s\S]*?){{\/each}}/g;
+  template = template.replace(eachRegex, (_, arrayKey, inner) => {
+    if (!Array.isArray(data[arrayKey])) return '';
+    return data[arrayKey].map(item => {
+      let rendered = inner;
+      for (const [k, v] of Object.entries(item)) {
+        const regex = new RegExp(`{{\\s*${k}\\s*}}`, 'g');
+        rendered = rendered.replace(regex, v ?? '');
+      }
+      return rendered;
+    }).join('');
+  });
+
 
   return template;
 }

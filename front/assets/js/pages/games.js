@@ -2,12 +2,12 @@ import { Modal } from '../components/modal.js';
 import { http } from '../core/http.js';
 import { renderTemplate } from '../core/template.js';
 
-export async function GamesPage(app) { 
+export async function GamesPage(app) {
   const games = await http.get('/games');
   console.log(games);
-   
 
- const rows = await Promise.all(
+
+  const rows = await Promise.all(
     games.map(({ id, title, genre, isActive }) =>
       renderTemplate('base/td-games.html', {
         id,
@@ -19,16 +19,15 @@ export async function GamesPage(app) {
   );
 
 
-
- console.log('estos son los rows de games' , rows); 
+ 
   const html = await renderTemplate('pages/games.html', { rows: rows.join('') });
   app.innerHTML = html;
-   console.log('este es el innerHTML que agregue a la variable app',app.innerHTML);
-    
+  //console.log('este es el innerHTML que agregue a la variable app', app.innerHTML);
 
-   const btnNew =   document.getElementById('btn-new');
-   if(!btnNew) return;
-   btnNew.addEventListener('click', async () => {
+
+  const btnNew = document.getElementById('btn-new');
+  if (!btnNew) return;
+  btnNew.addEventListener('click', async () => {
     const modal = await Modal.show({
       id: 'gameModal',
       title: 'Nuevo Juego',
@@ -59,5 +58,6 @@ export async function GamesPage(app) {
       alert('Juego guardado correctamente');
       GamesPage();
     });
+   
   });
 }
