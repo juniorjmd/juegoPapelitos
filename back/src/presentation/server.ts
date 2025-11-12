@@ -10,7 +10,27 @@ export class Server {
 
     constructor() {
         this.port = Number(process.env.PORT) || 3000;  
-        this.app.use(cors());
+            const allowedOrigins = [
+                'http://localhost:3000', // tu front local
+                'http://localhost:3001', // si tu front corre en 3001
+                'https://juegopapelitos.com', // dominio de producción
+                'https://juegopapelitos.netlify.app', // si usas Netlify
+    ];
+
+    this.app.use(cors({
+      origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error(`CORS bloqueado: ${origin}`));
+        }
+      },
+      credentials: true, // si manejas cookies o auth headers
+    }));
+
+
+
+
         this.app.use(express.json());
         this.app.use(Routes.routes);
     }
