@@ -1,5 +1,4 @@
-MONGO_URL=mongodb+srv://juniorjmd_db_user:xtM7o1CYOsFlBTXb@cluster0.bosimd3.mongodb.net/papelitosDB?authSource=admin
-PORT=3000 
+ 
 URL_FRONT=juegopapelitos.com/login
 MAIL_HOST=smtp-relay.brevo.com
 MAIL_PORT=587
