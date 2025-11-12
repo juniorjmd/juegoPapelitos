@@ -6,12 +6,20 @@ const gameSchema = new Schema({
     genre: { type: String, required: true },
     isActive: { type: Boolean, default: true },
     startDate: { type: Date, required: true, default: Date.now },
-    endDate: { type: Date },
-    players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Player' }]
+    endDate: { type: Date }, 
 }, {
     versionKey: false
 });
 
+gameSchema.virtual('players', {
+  ref: 'Player',            // Modelo relacionado
+  localField: '_id',         // Campo local en Game
+  foreignField: 'game'      // Campo en Player que referencia al Game
+});
+
+
+gameSchema.set('toObject', { virtuals: true });
+gameSchema.set('toJSON', { virtuals: true });
 const GameModel: Model<IGame> = mongoose.models.games || model<IGame>('Games', gameSchema);
 
 export default GameModel;

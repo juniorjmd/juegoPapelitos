@@ -11,5 +11,7 @@ const playerSchema = new Schema({
 });
 
 const PlayerModel: Model<IPlayer> = mongoose.models.Player || model<IPlayer>('Player', playerSchema);
+playerSchema.set('toJSON', { virtuals: true });
+playerSchema.set('toObject', { virtuals: true });
 
 export default PlayerModel;

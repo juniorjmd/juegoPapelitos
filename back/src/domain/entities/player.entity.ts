@@ -16,7 +16,8 @@ export class PlayerEntity implements IPlayer {
     }
     
     static fromInterface(i: IPlayer) {
-        const player = new PlayerEntity(i.id, i.user, i.game, i.isActive, i.friend);
+        const id = (i._id)?i._id : i.id;
+        const player = new PlayerEntity(id, i.user, i.game, i.isActive, i.friend);
         return player;
     }
 }
