@@ -14,7 +14,7 @@ export class Server {
                 'http://localhost:3000', // tu front local
                 'http://localhost:3001', // si tu front corre en 3001
                 'https://juegopapelitos.com', // dominio de producción
-                'https://juegopapelitos.netlify.app', // si usas Netlify
+                'https://meek-biscotti-0c4c7c.netlify.app', // si usas Netlify
     ];
 
     this.app.use(cors({
