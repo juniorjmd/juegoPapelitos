@@ -43,7 +43,7 @@ console.log('datos utilizados en el mail',
 const resend = new Resend(process.env.MAIL_PASS);
 
      const result =  await resend.emails.send({
-          from: "Juego Papelitos <noreply@sofdla.com.co>",
+          from: "Juego Papelitos <juniorjmd@gmail.com>",
           to: user.email,
           subject: "Cuenta creada - Juego Papelitos 🎲",
           html: html,
