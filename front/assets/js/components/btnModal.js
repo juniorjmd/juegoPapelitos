@@ -22,7 +22,9 @@ export class BtnModal extends HTMLElement {
     if (!this.innerHTML.trim()) this.innerHTML = textContent;
 
     // Registrar evento click
-    this.addEventListener('click', async () => {
+    this.addEventListener('click', async (e) => {
+      e.preventDefault();
+      e.stopPropagation();
       if (onOpenCode) {
         // alert(onOpenCode)
         try {
@@ -30,32 +32,62 @@ export class BtnModal extends HTMLElement {
         } catch (e) {
           console.error("Error ejecutando on-open:", e);
         }
-      }
-
+      } 
       console.log(datosExtra);
       let data = {};
-       try {
+      try {
         data = JSON.parse(datosExtra)
-        } catch (err) {
-          console.warn('⚠️ datosExtra no es JSON válido:', datosExtra);
-        }
-      const bodyData = { [nombreData]: dataset  , ...data }; 
+      } catch (err) {
+        console.warn('⚠️ datosExtra no es JSON válido:', datosExtra);
+      }
+      const bodyData = { [nombreData]: dataset, ...data };
       // console.log({bodyData});
       const modal = await Modal.show({
         id: modalId,
         title: modalTitle,
         bodyTemplate: modalTemplate,
         size: modalSize,
-        onSubForm,
-        bodyData
-      }); 
+        bodyData 
+      });
+      
+
+      const modalEl = document.getElementById(modalId);
+      if (!modalEl) {
+        console.error('No se encontró el elemento del modal en el DOM:', modalId);
+        return;
+      }
+
+      const form = document.getElementById('playersByGamModalForm');
+  if (!form) {
+    console.warn('⚠️ No se encontró el formulario #playersByGamModalForm dentro del modal.');
+    return;
+  } 
+  console.log('🎮 Formulario de jugadores inicializado.'); 
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+     if (onSubForm) {        
+           const fn = window[onSubForm];
+        if (typeof fn === 'function') {
+          fn(modal);
+        } else {
+          console.error(`❌ No se encontró la función global "${onSubForm}"`);
+        }
+      }
+  }, { once: true }); 
+
+       
       // 🔥 Disparar un evento personalizado para que otra parte pueda reaccionar
       this.dispatchEvent(new CustomEvent('modal:opened', { detail: { id: modalId } }));
 
-      // Esperar al cierre del modal
-      modal.element.addEventListener('hidden.bs.modal', () => {
+
+
+      modal._element.addEventListener('hidden.bs.modal', () => {
         this.dispatchEvent(new CustomEvent('modal:closed', { detail: { id: modalId } }));
+        modal._element.remove();
       });
+
+
     });
   }
 }
