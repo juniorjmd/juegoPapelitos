@@ -1,5 +1,7 @@
-import nodemailer from 'nodemailer';
+
+
 import SibApiV3Sdk from 'sib-api-v3-sdk';
+import { Resend } from 'resend';
 import fs from 'fs';
 import path from 'path'; 
 import type { IUser } from '../../interfaces/user.interface';
@@ -38,25 +40,14 @@ console.log('datos utilizados en el mail',
       .replace('{{loginUrl}}', this.urlFront)
       .replace('{{year}}', new Date().getFullYear().toString());
 
+const resend = new Resend(process.env.MAIL_PASS);
 
-const client = SibApiV3Sdk.ApiClient.instance;
-    const apiKey = client.authentications['api-key'];
-    apiKey.apiKey = process.env.MAIL_PASS!; // Tu API KEY
-     const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
-
-  const email = {
-      sender: {
-        email: process.env.BREVO_SENDER_EMAIL || process.env.MAIL_USER,
-        name: 'Juego Papelitos 🎲',
-      },
-      to: [{ email: user.email, name: user.name }],
-      subject: '🎉 Tu cuenta en Juego Papelitos ha sido creada',
-      htmlContent: html,
-    };
-
-    // 5. Envío real
-    const result = await apiInstance.sendTransacEmail(email);
+     const result =  await resend.emails.send({
+          from: "Juego Papelitos <noreply@papelitos.com>",
+          to: user.email,
+          subject: "Cuenta creada - Juego Papelitos 🎲",
+          html: html,
+        }); 
 
     console.log(`📧 Email enviado a ${user.email}`, result);
   }
